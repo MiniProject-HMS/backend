@@ -13,8 +13,13 @@ def get_pass(request):
 @csrf_exempt
 def handle_auth(request):
     if request.method == 'POST':
-        login_data = json.loads(request.body)
-        login_data = Users.handle_auth(login_data["admission_no"], login_data["password"])
-    return JsonResponse(login_data,safe=False)
+        try:
+            login_data = json.loads(request.body)
+            status = Users.handle_auth(login_data["admission_no"], login_data["password"])
+        except:
+            status = {"status":"failed"}
+    return JsonResponse(status,safe=False)
+
+
 
 

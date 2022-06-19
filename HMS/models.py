@@ -1,3 +1,4 @@
+from tkinter import CASCADE
 from django.db import models
 
 class Student(models.Model):
@@ -9,4 +10,7 @@ class Student(models.Model):
 class Login(models.Model):
     admission_no=models.ForeignKey(Student,on_delete=models.CASCADE)
     password=models.CharField(max_length=16, default="lbscek123")
+
+
+    
     
