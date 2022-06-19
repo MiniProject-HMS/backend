@@ -11,6 +11,11 @@ class Login(models.Model):
     admission_no=models.ForeignKey(Student,on_delete=models.CASCADE)
     password=models.CharField(max_length=16, default="lbscek123")
 
-
+class Complaints(models.Model):
+    complaint_id=models.BigAutoField(primary_key=True)
+    admission_no=models.ForeignKey(Student,on_delete=models.CASCADE)
+    room_no=models.IntegerField()
+    complaint_desc=models.TextField()
+    status=models.BooleanField(default=False)
     
     

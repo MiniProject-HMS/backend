@@ -31,4 +31,8 @@ class Users():
         else:
             return {"status":"failed"}
     
-   
+    def complaint_reg(adm_no,room_no,desc): #registering complaint into model
+        c = Student.objects.get(pk=adm_no)
+        c.complaints_set.create(admission_no=adm_no,room_no=room_no,complaint_desc=desc)
+        print(c.complaints_set.all())
+        return {'status':'success'}

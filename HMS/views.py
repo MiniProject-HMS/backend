@@ -20,6 +20,14 @@ def handle_auth(request):
             status = {"status":"failed"}
     return JsonResponse(status,safe=False)
 
-
+@csrf_exempt
+def complaint_reg(request):
+    if request.method =='POST':
+        try:
+            complaint_data=json.loads(request.body)
+            status = Users.complaint_reg(complaint_data["admission_no"],complaint_data["room_no"],complaint_data["complaint_desc"])
+        except:
+            status={'data':"not found"}
+    return JsonResponse(status,safe=False)
 
 
