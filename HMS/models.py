@@ -11,6 +11,10 @@ class Login(models.Model):
     admission_no=models.ForeignKey(Student,on_delete=models.CASCADE)
     password=models.CharField(max_length=16, default="lbscek123")
 
+class Workers(models.Model):
+    name=models.CharField(max_length=25)
+    designation=models.CharField(max_length=25)
+    phone_no=models.IntegerField(default=0)
 
     
     
