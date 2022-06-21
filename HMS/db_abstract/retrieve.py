@@ -35,4 +35,10 @@ class Users():
         c = Student.objects.get(pk=adm_no)
         c.complaints_set.create(admission_no=adm_no,room_no=room_no,complaint_desc=desc)
         return {'status':'success'}
+
+    def user_profile(): #sending data to user profile
+        profile=Student.objects.all().values('name','admission_no','hostel','room_no')
+        profile_list=list(profile)
+        profile_dict=({'data':profile_list})
+        return profile_dict
         
