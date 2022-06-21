@@ -5,7 +5,7 @@ from ..models import Complaints, Login, Student
 
 class Users():
     def get_users(): #retrieves all data from student model
-        users = Student.objects.all() 
+        users = Student.objects.all().values_list()
         users_list = list(users)
         users_dict = ({'data':users_list})
         return users_dict
@@ -34,5 +34,5 @@ class Users():
     def complaint_reg(adm_no,room_no,desc): #registering complaint into model
         c = Student.objects.get(pk=adm_no)
         c.complaints_set.create(admission_no=adm_no,room_no=room_no,complaint_desc=desc)
-        print(c.complaints_set.all())
         return {'status':'success'}
+        
