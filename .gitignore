@@ -1,0 +1,10 @@
+*.log
+*.pot
+*.pyc
+__pycache__
+media
+__init__.py
+*/migrations
+
+*.bak
+.venv
