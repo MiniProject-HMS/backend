@@ -20,6 +20,8 @@ def handle_auth(request):
             status = {"status":"failed"}
     return JsonResponse(status,safe=False)
 
-
+@csrf_exempt
+def complaint_work(request):
+    return JsonResponse(Users.complaint_work())
 
 

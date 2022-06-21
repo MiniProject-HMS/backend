@@ -31,4 +31,15 @@ class Users():
         else:
             return {"status":"failed"}
     
+    def complaint_reg(adm_no,room_no,desc): #registering complaint into model
+        c = Student.objects.get(pk=adm_no)
+        c.complaints_set.create(admission_no=adm_no,room_no=room_no,complaint_desc=desc)
+        print(c.complaints_set.all())
+        return {'status':'success'}
+
+    def complaint_work(): #retrieving complaint data
+        complaints_work=Complaints.objects.all().values('complaint_id','room_no','complaint_desc')
+        complaint_list=list(complaints_work)
+        complaint_dict=({'data':complaint_list})
+        return complaint_dict
    
