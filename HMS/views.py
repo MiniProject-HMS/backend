@@ -13,6 +13,7 @@ def get_pass(request):
 
 def user_profile(request):
     return JsonResponse(Users.user_profile(),safe=False)
+    
 @csrf_exempt
 def handle_auth(request):
     if request.method == 'POST':

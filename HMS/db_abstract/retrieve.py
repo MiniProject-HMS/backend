@@ -12,7 +12,7 @@ class Users():
 
     
 
-    def get_pass(): #retrieving data from login model
+    def get_pass(): #retrieving username  and password from login model
         login_id=Login.objects.all()
         login_id_list=list(login_id)
         login_id_dict=({'data':login_id_list})
