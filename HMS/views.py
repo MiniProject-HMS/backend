@@ -29,12 +29,20 @@ def complaint_reg(request):
     if request.method =='POST':
         try:
             complaint_data=json.loads(request.body)
-            status = Users.complaint_reg(complaint_data["admission_no"],complaint_data["room_no"],complaint_data["complaint_desc"])
+            status = Users.complaint_reg(complaint_data["admission_no"],complaint_data["hostel"],complaint_data["room_no"],complaint_data["complaint_desc"])
         except:
             status={'data':"not found"}
-    return JsonResponse(status,safe=False)
-
-    
+        return JsonResponse(status,safe=False)
+    if request.method =='GET':
+        try:
+            hostel = request.GET.get("hostel")
+            room_no = request.GET.get("room_no")
+            complaint=Users.complaint_view(hostel,room_no)
+            return JsonResponse(complaint,safe=False)
+        except:
+            status = {'data':"not found"}
+            return JsonResponse(status,safe=False)
+        
 def complaint_work(request):
     return JsonResponse(Users.complaint_work())
 

@@ -5,7 +5,7 @@ from ..models import Complaints, Login, Student
 
 class Users():
     def get_users(): #retrieves all data from student model
-        users = Student.objects.all().values_list()
+        users = Student.objects.all().values()
         users_list = list(users)
         users_dict = ({'data':users_list})
         return users_dict
@@ -31,10 +31,16 @@ class Users():
         else:
             return {"status":"failed"}
     
-    def complaint_reg(adm_no,room_no,desc): #registering complaint into model
+    def complaint_reg(adm_no,hostel,room_no,desc): #registering complaint into model
         c = Student.objects.get(pk=adm_no)
-        c.complaints_set.create(admission_no=adm_no,room_no=room_no,complaint_desc=desc)
+        c.complaints_set.create(admission_no=adm_no,hostel=hostel,room_no=room_no,complaint_desc=desc)
         return {'status':'success'}
+
+    def complaint_view(hostel,room_no):
+        complaint = Complaints.objects.values().filter(hostel=hostel,room_no = room_no)
+        complaint_list=list(complaint)
+        complaint_dict=({'data':complaint_list})
+        return complaint_dict
 
     def user_profile(): #sending data to user profile
         profile=Student.objects.all().values('name','admission_no','hostel','room_no')

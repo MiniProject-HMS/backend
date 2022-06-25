@@ -16,10 +16,11 @@ class Login(models.Model):
 class Complaints(models.Model):
     complaint_id=models.BigAutoField(primary_key=True)
     admission_no=models.ForeignKey(Student,on_delete=models.CASCADE)
+    hostel=models.CharField(max_length=20,default='null')
     room_no=models.IntegerField()
     complaint_desc=models.TextField()
     status=models.BooleanField(default=False)
-    
+
 class Workers(models.Model):
     name=models.CharField(max_length=25)
     designation=models.CharField(max_length=25)
