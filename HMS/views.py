@@ -34,4 +34,8 @@ def complaint_reg(request):
             status={'data':"not found"}
     return JsonResponse(status,safe=False)
 
+    
+def complaint_work(request):
+    return JsonResponse(Users.complaint_work())
+
 

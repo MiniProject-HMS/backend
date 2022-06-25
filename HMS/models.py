@@ -20,4 +20,10 @@ class Complaints(models.Model):
     complaint_desc=models.TextField()
     status=models.BooleanField(default=False)
     
+class Workers(models.Model):
+    name=models.CharField(max_length=25)
+    designation=models.CharField(max_length=25)
+    phone_no=models.IntegerField(default=0)
+
+    
     
