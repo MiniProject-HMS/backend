@@ -10,15 +10,11 @@ class Users():
         users_dict = ({'data':users_list})
         return users_dict
 
-    
-
     def get_pass(): #retrieving username  and password from login model
         login_id=Login.objects.all()
         login_id_list=list(login_id)
         login_id_dict=({'data':login_id_list})
         return login_id_dict
-
-
 
     def handle_auth(adm_no, passw): #authentication of login
         try:
@@ -36,7 +32,7 @@ class Users():
         c.complaints_set.create(admission_no=adm_no,hostel=hostel,room_no=room_no,complaint_desc=desc)
         return {'status':'success'}
 
-    def complaint_view(hostel,room_no):
+    def complaint_view(hostel,room_no): #sending complaints list to user
         complaint = Complaints.objects.values().filter(hostel=hostel,room_no = room_no)
         complaint_list=list(complaint)
         complaint_dict=({'data':complaint_list})
@@ -46,8 +42,7 @@ class Users():
         profile=Student.objects.all().values('name','admission_no','hostel','room_no')
         profile_list=list(profile)
         profile_dict=({'data':profile_list})
-        return profile_dict
-        
+        return profile_dict    
 
     def complaint_work(): #retrieving complaint data
         complaints_work=Complaints.objects.all().values('complaint_id','room_no','complaint_desc')
