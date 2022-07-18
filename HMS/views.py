@@ -63,7 +63,7 @@ def movement_in(request):
     if request.method == 'POST':
         try:
             in_data=json.loads(request.body)
-            status=Users.movement_in(in_data["id"])
+            status=Users.movement_in(in_data["id"],in_data["admission_no"])
         except Exception as e:
             print(e)
             status={'data':"not found"}
