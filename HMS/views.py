@@ -30,7 +30,8 @@ def complaint_reg(request):
         try:
             complaint_data=json.loads(request.body)
             status = Users.complaint_reg(complaint_data["admission_no"],complaint_data["hostel"],complaint_data["room_no"],complaint_data["complaint_desc"])
-        except:
+        except Exception as e :
+            print(e)
             status={'data':"not found"}
         return JsonResponse(status,safe=False)
     if request.method =='GET':
@@ -46,4 +47,25 @@ def complaint_reg(request):
 def complaint_work(request):
     return JsonResponse(Users.complaint_work())
 
+@csrf_exempt
+def movement_out(request):
+    if request.method == 'POST':
+        try:
+            out_data=json.loads(request.body)
+            status=Users.movement_out(out_data["admission_no"],out_data["hostel"])
+        except Exception as e:
+            print(e)
+            status={'data':"not found"}
+        return JsonResponse(status,safe=False)
+
+@csrf_exempt
+def movement_in(request):
+    if request.method == 'POST':
+        try:
+            in_data=json.loads(request.body)
+            status=Users.movement_in(in_data["id"])
+        except Exception as e:
+            print(e)
+            status={'data':"not found"}
+        return JsonResponse(status,safe=False)
 

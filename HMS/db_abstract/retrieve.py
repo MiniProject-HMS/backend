@@ -1,7 +1,8 @@
 from distutils.log import Log
 from urllib import request
-from django.http import HttpResponse
-from ..models import Complaints, Login, Student
+from django.http import HttpResponse, JsonResponse
+from ..models import Complaints, Login, Student,Movement
+from datetime import datetime
 
 class Users():
     def get_users(): #retrieves all data from student model
@@ -28,8 +29,7 @@ class Users():
             return {"status":"failed"}
     
     def complaint_reg(adm_no,hostel,room_no,desc): #registering complaint into model
-        c = Student.objects.get(pk=adm_no)
-        c.complaints_set.create(admission_no=adm_no,hostel=hostel,room_no=room_no,complaint_desc=desc)
+        Complaints.objects.create(admission_no_id=adm_no,hostel=hostel,room_no=room_no,complaint_desc=desc)
         return {'status':'success'}
 
     def complaint_view(hostel,room_no): #sending complaints list to user
@@ -49,4 +49,32 @@ class Users():
         complaint_list=list(complaints_work)
         complaint_dict=({'data':complaint_list})
         return complaint_dict
-   
+
+    def movement_out(adm_no,hostel): #scanning the QR to go out from the hostel
+        current_date=datetime.now()
+        Movement.objects.create(admission_no_id=adm_no,hostel=hostel,out_time=current_date)
+        id=Movement.objects.values('id').filter(admission_no=adm_no,mess_cut=0)
+        id_list=list(id)
+        id_dict=({'id':id_list})
+        return id_dict 
+
+    def movement_in(id): #scanning the QR to enter the hostel
+        Movement.objects.filter(id=id).update(in_time=datetime.now())
+        in_time=datetime.now()
+        out=Movement.objects.filter(id=id)
+        for i in out:
+            out_t=i.out_time
+        cut=(in_time-out_t).days
+        mess=Movement.objects.filter(admission_no=2019066).values('mess_cut').last()
+        mess_cut=mess.get('mess_cut')
+        if in_time.date().month == out_t.date().month :
+            cut=cut+mess_cut
+            if cut >= 15:
+                cut=15
+        if cut < 5:
+            Movement.objects.filter(id=id).update(mess_cut=0)
+        elif cut >5 & cut <=15:
+            Movement.objects.filter(id=id).update(mess_cut=cut)
+        else:
+            Movement.objects.filter(id=id).update(mess_cut=15)
+        return {"status":"success"}
