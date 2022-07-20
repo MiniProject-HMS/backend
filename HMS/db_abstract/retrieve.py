@@ -80,3 +80,8 @@ class Users():
         else:
             Movement.objects.filter(id=id).update(mess_cut=15)
         return {"status":"success"}
+
+    def completed_work(id,status):#updating status of the completed work
+        Complaints.objects.filter(complaint_id=id).update(status=status)
+        return {"status":"success"} 
+

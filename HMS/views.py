@@ -44,8 +44,18 @@ def complaint_reg(request):
             status = {'data':"not found"}
             return JsonResponse(status,safe=False)
         
+@csrf_exempt        
 def complaint_work(request):
-    return JsonResponse(Users.complaint_work())
+    if request.method == 'GET':
+        return JsonResponse(Users.complaint_work())
+    if request.method == 'POST':
+        try:
+            out_work=json.loads(request.body)#storing the post request body to out_work
+            status=Users.completed_work(out_work["complaint_id"],out_work["status"])
+        except Exception as e:
+            status={'data':"not found"}
+        return JsonResponse(status,safe=False)
+
 
 @csrf_exempt
 def movement_out(request):
@@ -68,4 +78,19 @@ def movement_in(request):
             print(e)
             status={'data':"not found"}
         return JsonResponse(status,safe=False)
+
+# @csrf_exempt
+# def bill_info(request):
+#     total = 10000
+#     mess_cut = [3,4,0,7]
+#     bill_per_ind = total/4
+#     bill_per_day = bill_per_ind/30
+#     bill_with_mess_cut = bill_per_ind-
+#     #bill_with = bill_without - mess_cut
+
+
+
+
+    data = {"month":'june'}
+    return JsonResponse(data, safe=False)
 

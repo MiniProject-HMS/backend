@@ -10,5 +10,7 @@ urlpatterns = [
     path('works/',views.complaint_work,name='complaint_work'),
     path('out/',views.movement_out,name='movement_out'),
     path('in/',views.movement_in,name='movement_in'),
+    # path('bill_info/',views.bill_info,name='bill_info'),
+
 
 ]

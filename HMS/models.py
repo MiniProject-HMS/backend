@@ -35,5 +35,9 @@ class Movement(models.Model):
     in_time=models.DateTimeField(auto_now=False, auto_now_add=False,null=True)
     mess_cut=models.BigIntegerField(default=0,null=True)
 
+#class Billinfo(models.Model):
+   # bill_id=models.BigAutoField(primary_key=True)
+    #admission_no=models.BigIntegerField
+
     
     
