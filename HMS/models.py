@@ -37,9 +37,8 @@ class Movement(models.Model):
 
 class Billinfo(models.Model):
    bill_id=models.BigAutoField(primary_key=True)
-   admission_no=models.BigIntegerField()
-   month=models.CharField(max_length=20)
-   year=models.BigIntegerField()
+   admission_no=models.ForeignKey(Student,on_delete=models.CASCADE)
+   month=models.DateTimeField(auto_now=False, auto_now_add=False,null=True)
    mess_cut=models.BigIntegerField()
    etablishment_charge=models.IntegerField()
    mess_fee=models.IntegerField()

@@ -45,7 +45,7 @@ class Users():
         return profile_dict    
 
     def complaint_work(): #retrieving complaint data
-        complaints_work=Complaints.objects.all().values('complaint_id','room_no','complaint_desc')
+        complaints_work=Complaints.objects.all().values('complaint_id','room_no','complaint_desc','status')
         complaint_list=list(complaints_work)
         complaint_dict=({'data':complaint_list})
         return complaint_dict
