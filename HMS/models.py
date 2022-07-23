@@ -35,9 +35,19 @@ class Movement(models.Model):
     in_time=models.DateTimeField(auto_now=False, auto_now_add=False,null=True)
     mess_cut=models.BigIntegerField(default=0,null=True)
 
-#class Billinfo(models.Model):
-   # bill_id=models.BigAutoField(primary_key=True)
-    #admission_no=models.BigIntegerField
+class Billinfo(models.Model):
+   bill_id=models.BigAutoField(primary_key=True)
+   admission_no=models.BigIntegerField()
+   month=models.CharField(max_length=20)
+   year=models.BigIntegerField()
+   mess_cut=models.BigIntegerField()
+   etablishment_charge=models.IntegerField()
+   mess_fee=models.IntegerField()
+   fine=models.IntegerField(default=0)
+   last_date=models.CharField(max_length=30)
+   total=models.IntegerField()
+   
+
 
     
     
