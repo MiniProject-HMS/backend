@@ -85,8 +85,8 @@ class Users():
         Complaints.objects.filter(complaint_id=id).update(status=status)
         return {"status":"success"} 
 
-    #def bill_info(adm_no,month):#retrieving data for bill information
-      #  Billinfo.objects.filter()
-
+    def bill_receipt(adm_no,month):#retrieving data for bill information
+        bill=Billinfo.objects.filter(admission=adm_no,month=month).all()
+        return bill
 
 

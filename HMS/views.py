@@ -94,3 +94,13 @@ def movement_in(request):
     data = {"month":'june'}
     return JsonResponse(data, safe=False)
 
+def bill_receipt(request):
+    if request.method == 'GET':
+        try:
+            admission_no = request.GET.get("admission_no")
+            month = request.GET.get("month")
+            bill = Users.bill_receipt(admission_no,month)
+            return JsonResponse(bill,safe=False)
+        except:
+            status = {'data':"not found"}
+            return JsonResponse(status,safe=False)

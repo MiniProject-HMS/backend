@@ -11,6 +11,6 @@ urlpatterns = [
     path('out/',views.movement_out,name='movement_out'),
     path('in/',views.movement_in,name='movement_in'),
     # path('bill_info/',views.bill_info,name='bill_info'),
-
+    path('bill/',views.bill_receipt,name='bill_receipt'),
 
 ]

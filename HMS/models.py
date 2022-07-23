@@ -38,12 +38,12 @@ class Movement(models.Model):
 class Billinfo(models.Model):
    bill_id=models.BigAutoField(primary_key=True)
    admission_no=models.ForeignKey(Student,on_delete=models.CASCADE)
-   month=models.DateTimeField(auto_now=False, auto_now_add=False,null=True)
+   month=models.CharField (max_length=20)
    mess_cut=models.BigIntegerField()
    etablishment_charge=models.IntegerField()
    mess_fee=models.IntegerField()
    fine=models.IntegerField(default=0)
-   last_date=models.CharField(max_length=30)
+   last_date=models.DateTimeField(auto_now=False, auto_now_add=False,null=True)
    total=models.IntegerField()
    
 
