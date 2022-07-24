@@ -4,6 +4,6 @@
 __pycache__
 media
 __init__.py
-migrations/*
+backend/HMS/migrations/*
 *.bak
 .venv
