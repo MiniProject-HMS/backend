@@ -5,16 +5,16 @@ from re import T
 from django.http import HttpResponse, JsonResponse
 from .db_abstract.retrieve import Users
 
-def get_users(request):
+def get_users(request): #getting the details of all students
     return JsonResponse(Users.get_users(), safe=False)
 
 def get_pass(request):
     return JsonResponse(Users.get_pass(),safe=False)
 
-def user_profile(request):
+def user_profile(request): #getting the data of students for their profile
     return JsonResponse(Users.user_profile(),safe=False)
     
-@csrf_exempt
+@csrf_exempt #password verification
 def handle_auth(request):
     if request.method == 'POST':
         try:
@@ -24,7 +24,7 @@ def handle_auth(request):
             status = {"status":"failed"}
     return JsonResponse(status,safe=False)
 
-@csrf_exempt
+@csrf_exempt #registration of complaints
 def complaint_reg(request):
     if request.method =='POST':
         try:
@@ -34,7 +34,7 @@ def complaint_reg(request):
             print(e)
             status={'data':"not found"}
         return JsonResponse(status,safe=False)
-    if request.method =='GET':
+    if request.method =='GET': #viewing the registered complaints of each student in their profile
         try:
             hostel = request.GET.get("hostel")
             room_no = request.GET.get("room_no")
@@ -46,11 +46,11 @@ def complaint_reg(request):
         
 @csrf_exempt        
 def complaint_work(request):
-    if request.method == 'GET':
+    if request.method == 'GET': #wrokers viewing all the complaints registered by students
         return JsonResponse(Users.complaint_work())
     if request.method == 'POST':
         try:
-            out_work=json.loads(request.body)#storing the post request body to out_work
+            out_work=json.loads(request.body) #updating of the status of works by workers after completion
             status=Users.completed_work(out_work["complaint_id"],out_work["status"])
         except Exception as e:
             status={'data':"not found"}
@@ -59,7 +59,7 @@ def complaint_work(request):
 
 @csrf_exempt
 def movement_out(request):
-    if request.method == 'POST':
+    if request.method == 'POST': #stroing the data when going out from the hostel
         try:
             out_data=json.loads(request.body)
             status=Users.movement_out(out_data["admission_no"],out_data["hostel"])
@@ -70,7 +70,7 @@ def movement_out(request):
 
 @csrf_exempt
 def movement_in(request):
-    if request.method == 'POST':
+    if request.method == 'POST': #storing the data when entering the hostel
         try:
             in_data=json.loads(request.body)
             status=Users.movement_in(in_data["id"],in_data["admission_no"])
@@ -88,19 +88,14 @@ def movement_in(request):
 #     bill_with_mess_cut = bill_per_ind-
 #     #bill_with = bill_without - mess_cut
 
-
-
-
-    data = {"month":'june'}
-    return JsonResponse(data, safe=False)
-
 def bill_receipt(request):
-    if request.method == 'GET':
+    if request.method == 'GET': #getting the bill information of each student by month
         try:
             admission_no = request.GET.get("admission_no")
             month = request.GET.get("month")
             bill = Users.bill_receipt(admission_no,month)
             return JsonResponse(bill,safe=False)
-        except:
+        except Exception as e:
+            print(e)
             status = {'data':"not found"}
             return JsonResponse(status,safe=False)

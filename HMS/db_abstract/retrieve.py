@@ -1,7 +1,7 @@
 from distutils.log import Log
 from urllib import request
 from django.http import HttpResponse, JsonResponse
-from ..models import Complaints, Login, Student,Movement
+from ..models import Billinfo, Complaints, Login, Student,Movement
 from datetime import datetime
 
 class Users():
@@ -86,7 +86,9 @@ class Users():
         return {"status":"success"} 
 
     def bill_receipt(adm_no,month):#retrieving data for bill information
-        bill=Billinfo.objects.filter(admission=adm_no,month=month).all()
-        return bill
+        bill=Billinfo.objects.values().filter(admission_no=adm_no,month=month)
+        bill_list=list(bill)
+        bill_dict=({"bill":bill_list})
+        return bill_dict
 
 
