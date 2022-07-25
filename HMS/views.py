@@ -85,15 +85,6 @@ def movement_in(request):
             status={'data':"not found"}
         return JsonResponse(status,safe=False)
 
-# @csrf_exempt
-# def bill_info(request):
-#     total = 10000
-#     mess_cut = [3,4,0,7]
-#     bill_per_ind = total/4
-#     bill_per_day = bill_per_ind/30
-#     bill_with_mess_cut = bill_per_ind-
-#     #bill_with = bill_without - mess_cut
-
 def bill_receipt(request):
     if request.method == 'GET': #getting the bill information of each student by month
         try:

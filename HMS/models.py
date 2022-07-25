@@ -30,7 +30,6 @@ class Movement(models.Model):
     id=models.BigAutoField(primary_key=True)
     admission_no=models.ForeignKey(Student,on_delete=models.CASCADE)
     hostel=models.CharField(max_length=20)
-    #location=models.PointField()
     out_time=models.DateTimeField(auto_now=False, auto_now_add=False)
     in_time=models.DateTimeField(auto_now=False, auto_now_add=False,null=True)
     mess_cut=models.BigIntegerField(default=0,null=True)
