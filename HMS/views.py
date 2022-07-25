@@ -12,7 +12,13 @@ def get_pass(request):
     return JsonResponse(Users.get_pass(),safe=False)
 
 def user_profile(request): #getting the data of students for their profile
-    return JsonResponse(Users.user_profile(),safe=False)
+    if request.method == 'GET':
+        try:
+            adm_no = request.GET.get("admission_no")
+            return JsonResponse(Users.user_profile(adm_no),safe=False)
+        except Exception as e:
+            status = {"status":"failed"}
+            return JsonResponse(status,safe=False)
     
 @csrf_exempt #password verification
 def handle_auth(request):

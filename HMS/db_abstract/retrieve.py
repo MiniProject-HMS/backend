@@ -38,8 +38,8 @@ class Users():
         complaint_dict=({'data':complaint_list})
         return complaint_dict
 
-    def user_profile(): #sending data to user profile
-        profile=Student.objects.all().values('name','admission_no','hostel','room_no')
+    def user_profile(adm_no): #sending data to user profile
+        profile=Student.objects.values('name','admission_no','hostel','room_no').filter(admission_no=adm_no)
         profile_list=list(profile)
         profile_dict=({'data':profile_list})
         return profile_dict    
