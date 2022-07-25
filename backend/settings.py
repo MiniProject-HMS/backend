@@ -79,8 +79,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'df5cl9srherg5q',
+        'USER' : 'sbuefqlywkmnqn',
+        'PASSWORD' : 'a1235ae426642f9a322ca50c5bbe00f57086ffde7e695edf3b7ab77dcc60589e',
+        'HOST' : 'ec2-3-222-74-92.compute-1.amazonaws.com',
+        'PORT' : '5432'
     }
 }
 
@@ -113,7 +117,7 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

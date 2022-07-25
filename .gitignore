@@ -1,0 +1,9 @@
+*.log
+*.pot
+*.pyc
+__pycache__
+media
+__init__.py
+backend/HMS/migrations/*
+*.bak
+.venv
