@@ -38,6 +38,7 @@ class Billinfo(models.Model):
    bill_id=models.BigAutoField(primary_key=True)
    admission_no=models.ForeignKey(Student,on_delete=models.CASCADE)
    month=models.CharField(max_length=20)
+   hostel=models.CharField(max_length=10,default='MH1')
    mess_cut=models.BigIntegerField()
    etablishment_charge=models.IntegerField()
    mess_fee=models.IntegerField()
